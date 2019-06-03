@@ -1,3 +1,4 @@
+
 """shunterbackend URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -18,18 +19,19 @@ from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from rest_framework.documentation import include_docs_urls
 from rest_framework import routers
-from userprofile import views
+from userprofile import views as userprofile_views
+from prikmuur import views as prikmuur_views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-
+router.register(r'users', userprofile_views.UserViewSet)
+router.register(r'groups', userprofile_views.GroupViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('hello/', views.HelloView.as_view(), name='hello'),
     path('admin/', admin.site.urls),
+    path('prikmuur/', prikmuur_views.PostList.as_view()),
+    path('prikmuur/<int:pk>', prikmuur_views.PostDetail.as_view()),
 ]

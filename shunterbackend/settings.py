@@ -32,6 +32,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
@@ -41,6 +43,7 @@ REST_FRAMEWORK = {
 INSTALLED_APPS = [
     'rest_framework',
     'userprofile.apps.UserprofileConfig',
+    'prikmuur.apps.PrikmuurConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -4,3 +4,4 @@
 ###### Requirements without Version Specifiers ######
 django
 djangorestframework
+djangorestframework_simplejwt

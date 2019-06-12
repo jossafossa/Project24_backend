@@ -1,7 +1,5 @@
-#
-####### example-requirements.txt #######
-#
-###### Requirements without Version Specifiers ######
 django
 djangorestframework
-djangorestframework_simplejwt
+djangorestframework_jwt
+django-rest-auth
+django-allauth

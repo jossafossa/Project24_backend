@@ -1,13 +1,3 @@
-from prikmuur.models import Post
-from prikmuur.serializers import PrikmuurSerializer
-from rest_framework import generics
+from django.shortcuts import render
 
-
-class PostList(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PrikmuurSerializer
-
-
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PrikmuurSerializer
+# Create your views here.

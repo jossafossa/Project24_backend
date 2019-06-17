@@ -12,7 +12,7 @@ class Interest(models.Model):
 
 class CustomUser(AbstractUser):
     name = models.CharField(blank=True, max_length=255)
-    interests = models.ManyToManyField(Interest)
+    interests = models.ManyToManyField(Interest, blank=True)
     pic1 = models.ImageField(blank=True)
     pic2 = models.ImageField(blank=True)
     pic3 = models.ImageField(blank=True)

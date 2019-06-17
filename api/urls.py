@@ -14,4 +14,6 @@ urlpatterns = format_suffix_patterns([
         include('users.urls')),
     path('prikmuur/',
         include('prikmuur.urls')),
+    path('interests/',
+        include('interests.urls')),
 ])

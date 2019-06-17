@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'api',
     'users',
     'prikmuur',
+    'interests',
 ]
 
 MIDDLEWARE = [

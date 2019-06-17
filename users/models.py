@@ -1,18 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
-class Interest(models.Model):
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        ordering = ('name',)
-    def ___str___(self):
-        return self.name
-
+import interests.models
 
 class CustomUser(AbstractUser):
     name = models.CharField(blank=True, max_length=255)
-    interests = models.ManyToManyField(Interest, blank=True)
+    interests = models.ManyToManyField(interests.models.Interest, blank=True)
     pic1 = models.ImageField(blank=True)
     pic2 = models.ImageField(blank=True)
     pic3 = models.ImageField(blank=True)

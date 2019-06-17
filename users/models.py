@@ -10,5 +10,6 @@ class CustomUser(AbstractUser):
     pic3 = models.ImageField(blank=True)
     pic4 = models.ImageField(blank=True)
     pic5 = models.ImageField(blank=True)
+
     def __str__(self):
         return self.email

@@ -6,5 +6,6 @@ urlpatterns = [
         views.PostList.as_view(),
         name='prikmuur-list'),
     path('<int:pk>',
-        views.PostDetail.as_view()),
+        views.PostDetail.as_view(),
+        name='post-detail'),
 ]

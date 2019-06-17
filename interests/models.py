@@ -5,6 +5,6 @@ class Interest(models.Model):
 
     class Meta:
         ordering = ('name',)
-    def ___str___(self):
-        return self.name
 
+    def __str__(self):
+        return self.name

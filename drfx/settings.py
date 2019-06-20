@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'prikmuur',
     'interests',
+    'matcher',
 ]
 
 MIDDLEWARE = [

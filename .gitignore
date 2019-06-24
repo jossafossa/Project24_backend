@@ -2,3 +2,4 @@ notes.md
 .vscode
 env/
 *.pyc 
+prikmuur/migrations/*

@@ -3,3 +3,4 @@ notes.md
 env/
 *.pyc 
 prikmuur/migrations/*
+db.sqlite3

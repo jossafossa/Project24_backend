@@ -11,7 +11,8 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
-
+    liked = forms.ModelMultipleChoiceField(queryset=CustomUser.objects.all(),
+        required=False)
     class Meta:
         model = CustomUser
         fields = UserChangeForm.Meta.fields

@@ -9,4 +9,7 @@ urlpatterns = [
     path('<int:pk>',
         views.UserDetailView.as_view(),
         name='customuser-detail'),
+#    path('getUser',
+#        views.GetMatchCandidateUser.as_view(),
+#        name='get-user'),
 ]

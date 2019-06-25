@@ -10,7 +10,8 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ['email', 'username', 'name']
+    list_display = ['email', 'username', 'name', ]
+    #filter_horizontal = ['liked', ]
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

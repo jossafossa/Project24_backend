@@ -10,27 +10,6 @@ class CustomUser(AbstractUser):
     pic3 = models.ImageField(blank=True)
     pic4 = models.ImageField(blank=True)
     pic5 = models.ImageField(blank=True)
-
     def __str__(self):
         return self.email
-
-class FriendCircle(models.Model):
-    name = models.CharField(blank=True, max_length=255)
-    description = models.CharField(blank=True, max_length=1000)
-    interests = models.ManyToManyField(interests.models.Interest, blank=True)
-
-    def __str__(self):
-        return self.name
-
-class FriendCircleMembership(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    friendcircle = models.ForeignKey(FriendCircle, on_delete=models.CASCADE)
-    startdate = models.DateTimeField(auto_now_add=True)
-    enddate = models.DateTimeField(blank=True)
-
-    def __str__(self):
-        return self.user.name + " member at " + self.friendcircle.name
-
-    class Meta:
-        unique_together = (('user', 'friendcircle'))
 

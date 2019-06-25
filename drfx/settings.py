@@ -38,9 +38,9 @@ INSTALLED_APPS = [
 
     'api',
     'users',
+    'friendcircle',
     'prikmuur',
     'interests',
-    'matcher',
 ]
 
 MIDDLEWARE = [

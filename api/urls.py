@@ -12,7 +12,7 @@ urlpatterns = format_suffix_patterns([
         include('rest_auth.registration.urls')),
     path('users/',
         include('users.urls')),
-    path('friendcircle',
+    path('friendcircle/',
         include('friendcircle.urls')),
     path('prikmuur/',
         include('prikmuur.urls')),

@@ -6,10 +6,10 @@ urlpatterns = [
     path('',
         views.FriendCircleListView.as_view(),
         name='friendcircle-list'),
-    path('/<int:pk>',
+    path('<int:pk>',
         views.FriendCircleDetailView.as_view(),
         name='friendcircle-detail'),
-    path('/getCandidate',
+    path('getCandidate',
         views.GetMatchCandidateFriendCircle.as_view(),
         name='get-Candidate'),
 

@@ -18,18 +18,19 @@ class FriendCircleDetailView(generics.RetrieveUpdateDestroyAPIView):
 def pick_random_from_qs(qs):
     return random.randrange(1, len(qs) + 1)
 
+class GetMyMemberships(generics.ListAPIView):
+    serializer_class = serializers.FriendCircleSerializer
+    def get_queryset(self):
+        return(models.FriendCircle.objects.filter(friendcirclemembership__user=self.request.user))
+
 class GetMatchCandidateFriendCircle(generics.ListAPIView):
-#    queryset = models.FriendCircle.objects.all()
     serializer_class = serializers.FriendCircleSerializer
     def get_queryset(self):
         groups = models.FriendCircle.objects.all()
 
-        already_swiped_qs = models.FriendCircleMatcher.objects.filter(user=self.request.user)
         # Exclude groups already swiped
+        already_swiped_qs = models.FriendCircleMatcher.objects.filter(user=self.request.user)
+        already_swiped_qs = already_swiped_qs.exclude(user_match_status='O')
         for already_swiped in already_swiped_qs:
-            if (already_swiped.user_match_status == 'O'):
-                groups = groups.exclude(id=already_swiped.friendcircle.id)
-        # Exclude groups that the user is already a member of
-        
-        groups = groups.filter(id = pick_random_from_qs(groups))
+            groups = groups.exclude(id=already_swiped.friendcircle.id)
         return(groups)

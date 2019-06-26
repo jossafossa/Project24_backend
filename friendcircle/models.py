@@ -16,7 +16,7 @@ class FriendCircleMembership(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     friendcircle = models.ForeignKey(FriendCircle, on_delete=models.CASCADE)
     startdate = models.DateTimeField(auto_now_add=True)
-    enddate = models.DateTimeField(blank=True)
+    enddate = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.user.name + " member at " + self.friendcircle.name

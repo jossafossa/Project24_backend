@@ -12,5 +12,7 @@ urlpatterns = [
     path('getCandidate',
         views.GetMatchCandidateFriendCircle.as_view(),
         name='get-Candidate'),
-
+    path('GetMyMemberships',
+        views.GetMyMemberships.as_view(),
+        name='get-mymemberships'),
 ]

@@ -15,4 +15,7 @@ urlpatterns = [
     path('GetMyMemberships',
         views.GetMyMemberships.as_view(),
         name='get-mymemberships'),
+    path('SwipeCandidateFriendCircle',
+        views.SwipeCandidateFriendCircle.as_view(),
+        name='swipecandidatefriendcircle'),
 ]

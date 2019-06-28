@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from rest_framework.views import APIView
 import random
 
 from . import models
@@ -34,3 +35,6 @@ class GetMatchCandidateFriendCircle(generics.ListAPIView):
         for already_swiped in already_swiped_qs:
             groups = groups.exclude(id=already_swiped.friendcircle.id)
         return(groups)
+
+class SwipeCandidateFriendCircle(generics.CreateAPIView):
+    serializer_class = serializers.SwipeCandidateFriendCircleSerializer

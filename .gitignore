@@ -1,10 +1,13 @@
 notes.md
 .vscode
 env/
-*.pyc 
 
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+.env
 db.sqlite3
-prikmuur/migrations/*
-friendcircle/migrations/*
-interests/migrations/*
-users/migrations/*

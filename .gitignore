@@ -2,5 +2,9 @@ notes.md
 .vscode
 env/
 *.pyc 
-prikmuur/migrations/*
+
 db.sqlite3
+prikmuur/migrations/*
+friendcircle/migrations/*
+interests/migrations/*
+users/migrations/*

@@ -7,3 +7,4 @@ from .serializers import InterestSerializer
 class InterestList(generics.ListCreateAPIView):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

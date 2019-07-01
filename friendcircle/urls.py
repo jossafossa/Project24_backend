@@ -9,9 +9,12 @@ urlpatterns = [
     path('<int:pk>',
         views.FriendCircleDetailView.as_view(),
         name='friendcircle-detail'),
-    path('getCandidate',
+    path('getCandidateFriendCircle',
         views.GetMatchCandidateFriendCircle.as_view(),
-        name='get-Candidate'),
+        name='get-CandidateFriendcircle'),
+    path('getCandidateUser',
+        views.GetMatchCandidateUser.as_view(),
+        name='get-CandidateUser'),
     path('GetMyMemberships',
         views.GetMyMemberships.as_view(),
         name='get-mymemberships'),
@@ -21,5 +24,4 @@ urlpatterns = [
     path('<int:pk>/SwipeCandidateUser',
         views.SwipeCandidateUser.as_view(),
         name='swipecandidateuser'),
-
 ]

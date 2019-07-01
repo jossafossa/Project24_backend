@@ -5,6 +5,8 @@ import random
 
 from . import models
 from . import serializers
+from users.serializers import UserSerializer
+from users.models import CustomUser
 
 class FriendCircleListView(generics.ListCreateAPIView):
     queryset = models.FriendCircle.objects.all()
@@ -36,6 +38,19 @@ class GetMatchCandidateFriendCircle(generics.ListAPIView):
         for already_swiped in already_swiped_qs:
             groups = groups.exclude(id=already_swiped.friendcircle.id)
         return(groups)
+
+class GetMatchCandidateUser(generics.ListAPIView):
+    serializer_class = UserSerializer
+    def get_queryset(self):
+        users = CustomUser.objects.all() #TODO add filter
+
+        # Exclude groups already swiped
+        #already_swiped_qs = models.FriendCircleMatcher.objects.filter(user=self.request.user)
+        #already_swiped_qs = already_swiped_qs.exclude(friendcircle_match_status='O')
+        #for already_swiped in already_swiped_qs:
+        #    groups = groups.exclude(id=already_swiped.friendcircle.id)
+        return(users)
+
 
 class SwipeCandidateFriendCircle(generics.CreateAPIView):
     serializer_class = serializers.SwipeCandidateFriendCircleSerializer

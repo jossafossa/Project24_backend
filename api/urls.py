@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework.urlpatterns import format_suffix_patterns
+
 from . import views
 
 
@@ -14,8 +15,8 @@ urlpatterns = format_suffix_patterns([
         include('users.urls')),
     path('friendcircle/',
         include('friendcircle.urls')),
-    path('prikmuur/',
-        include('prikmuur.urls')),
     path('interests/',
         include('interests.urls')),
+    path('prikmuur/',
+        include('prikmuur.urls')),
 ])

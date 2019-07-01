@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from django.shortcuts import get_object_or_404
 
 from . import models
 from . import serializers
@@ -23,11 +24,13 @@ class GetMatchCandidateUser(generics.ListAPIView):
         #print(user)
         return users
 
-class GetMyUser(generics.ListCreateAPIView):
+class GetMyUser(generics.RetrieveAPIView):
+    queryset = models.CustomUser.objects.all()
     serializer_class = serializers.UserSerializer
-    def get_queryset(self):
-        users = models.CustomUser.objects.filter(id=self.request.user.id)
-        return users
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, id=self.request.user.id)
+        return obj
 
 class UserListView(generics.ListCreateAPIView):
     queryset = models.CustomUser.objects.all()

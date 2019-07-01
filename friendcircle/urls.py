@@ -12,7 +12,7 @@ urlpatterns = [
     path('getCandidateFriendCircle',
         views.GetMatchCandidateFriendCircle.as_view(),
         name='get-CandidateFriendcircle'),
-    path('getCandidateUser',
+    path('getCandidateUser/<int:pk>',
         views.GetMatchCandidateUser.as_view(),
         name='get-CandidateUser'),
     path('GetMyMemberships',
@@ -21,7 +21,7 @@ urlpatterns = [
     path('SwipeCandidateFriendCircle',
         views.SwipeCandidateFriendCircle.as_view(),
         name='swipecandidatefriendcircle'),
-    path('<int:pk>/SwipeCandidateUser',
+    path('SwipeCandidateUser/<int:pk>',
         views.SwipeCandidateUser.as_view(),
         name='swipecandidateuser'),
 ]

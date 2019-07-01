@@ -42,13 +42,15 @@ class GetMatchCandidateFriendCircle(generics.ListAPIView):
 class GetMatchCandidateUser(generics.ListAPIView):
     serializer_class = UserSerializer
     def get_queryset(self):
-        users = CustomUser.objects.all() #TODO add filter
+        friendcircle = self.kwargs.get('pk')
+        users = CustomUser.objects.all()
 
         # Exclude groups already swiped
-        #already_swiped_qs = models.FriendCircleMatcher.objects.filter(user=self.request.user)
-        #already_swiped_qs = already_swiped_qs.exclude(friendcircle_match_status='O')
-        #for already_swiped in already_swiped_qs:
-        #    groups = groups.exclude(id=already_swiped.friendcircle.id)
+        already_swiped_qs = models.FriendCircleMatcher.objects.filter(friendcircle_id=friendcircle)
+        already_swiped_qs = already_swiped_qs.exclude(friendcircle_match_status='O')
+        for already_swiped in already_swiped_qs:
+            users = users.exclude(id=already_swiped.user.id)
+
         return(users)
 
 

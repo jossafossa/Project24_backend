@@ -7,10 +7,9 @@ from .permissions import IsOwnerOrReadOnly
 
 class PostList(generics.ListCreateAPIView):
     serializer_class = PrikmuurSerializer
-#    queryset = Post.objects.all()
 
-#    def perform_create(self, serializer):
-#        serializer.save(postedBy=self.request.user, group=self.kwargs.get('fcpk'))
+    def perform_create(self, serializer):
+        serializer.save(postedBy=self.request.user)
 
     def get_queryset(self):
         friendcircle = self.kwargs.get('pk')

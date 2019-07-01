@@ -1,7 +1,14 @@
 from rest_framework import serializers
 from . import models
+from interests.models import Interest
 
 class FriendCircleSerializer(serializers.ModelSerializer):
+    interests = serializers.SlugRelatedField(
+        many=True,
+        read_only=False,
+        slug_field='name',
+        queryset=Interest.objects.all(),
+     )
     class Meta:
         model = models.FriendCircle
         fields = ('url', 'id', 'name', 'description', 'interests', 'members', )

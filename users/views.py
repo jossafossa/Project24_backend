@@ -23,6 +23,12 @@ class GetMatchCandidateUser(generics.ListAPIView):
         #print(user)
         return users
 
+class GetMyUser(generics.ListCreateAPIView):
+    serializer_class = serializers.UserSerializer
+    def get_queryset(self):
+        users = models.CustomUser.objects.filter(id=self.request.user.id)
+        return users
+
 class UserListView(generics.ListCreateAPIView):
     queryset = models.CustomUser.objects.all()
     serializer_class = serializers.UserSerializer

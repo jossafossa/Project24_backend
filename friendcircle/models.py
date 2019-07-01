@@ -13,8 +13,8 @@ class FriendCircle(models.Model):
 
 # Keeps track of FriendCircle memberships
 class FriendCircleMembership(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    friendcircle = models.ForeignKey(FriendCircle, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, related_name="friendcirclememberships", on_delete=models.CASCADE)
+    friendcircle = models.ForeignKey(FriendCircle, related_name="friendcirclememberships", on_delete=models.CASCADE)
     startdate = models.DateTimeField(auto_now_add=True)
     enddate = models.DateTimeField(null=True, blank=True)
 

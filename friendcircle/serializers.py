@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from . import models
+from users.models import CustomUser
 from interests.models import Interest
 
 class FriendCircleSerializer(serializers.ModelSerializer):
@@ -34,3 +35,25 @@ class SwipeCandidateFriendCircleSerializer(serializers.Serializer):
         if obj.user_match_status == 'O':
             obj.user_match_status = swipe_choice
             obj.save()
+            # Add user to friendcircle when both swiped right
+            if obj.user_match_status == 'V' and obj.friendcircle_match_status == 'V':
+                member_obj, member_created = models.FriendCircleMembership.objects.get_or_create(user=self.context['request'].user, friendcircle=friendcircle)
+                member_obj.save()
+
+class SwipeCandidateUserSerializer(serializers.Serializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
+    swipe_choice = serializers.ChoiceField(choices=['V', 'X',],)
+    def save(self):
+        user = self.validated_data['user']
+        swipe_choice = self.validated_data['swipe_choice']
+        friendcircle = self.context.get('friendcircle')
+        obj, created = models.FriendCircleMatcher.objects.get_or_create(user=user, friendcircle=friendcircle)
+        # Only allow status to be set when no choice has yet been made.
+        if obj.friendcircle_match_status == 'O':
+            obj.friendcircle_match_status = swipe_choice
+            obj.save()
+            # Add user to friendcircle when both swiped right
+            if obj.user_match_status == 'V' and obj.friendcircle_match_status == 'V':
+                member_obj, member_created = models.FriendCircleMembership.objects.get_or_create(user=user, friendcircle=friendcircle)
+                member_obj.save()
+

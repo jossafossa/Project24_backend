@@ -18,4 +18,8 @@ urlpatterns = [
     path('SwipeCandidateFriendCircle',
         views.SwipeCandidateFriendCircle.as_view(),
         name='swipecandidatefriendcircle'),
+    path('<int:pk>/SwipeCandidateUser',
+        views.SwipeCandidateUser.as_view(),
+        name='swipecandidateuser'),
+
 ]

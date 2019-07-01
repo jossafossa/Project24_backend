@@ -1,5 +1,6 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.views import APIView
+from rest_framework.response import Response
 import random
 
 from . import models
@@ -27,7 +28,7 @@ class GetMyMemberships(generics.ListAPIView):
 class GetMatchCandidateFriendCircle(generics.ListAPIView):
     serializer_class = serializers.FriendCircleSerializer
     def get_queryset(self):
-        groups = models.FriendCircle.objects.all()
+        groups = models.FriendCircle.objects.filter(friendcirclemembership__user=self.request.user)
 
         # Exclude groups already swiped
         already_swiped_qs = models.FriendCircleMatcher.objects.filter(user=self.request.user)
@@ -38,3 +39,19 @@ class GetMatchCandidateFriendCircle(generics.ListAPIView):
 
 class SwipeCandidateFriendCircle(generics.CreateAPIView):
     serializer_class = serializers.SwipeCandidateFriendCircleSerializer
+
+class SwipeCandidateUser(APIView):
+    serializer_class = serializers.SwipeCandidateUserSerializer
+    def post(self, request, pk, format=None):
+
+        try:
+            friendcircle = models.FriendCircle.objects.get(pk=pk)
+        except Snippet.DoesNotExist:
+            raise Http404
+
+        serializer = serializers.SwipeCandidateUserSerializer(data=request.data,  context={'friendcircle': friendcircle})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

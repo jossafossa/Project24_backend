@@ -5,4 +5,4 @@ class PrikmuurSerializer(serializers.ModelSerializer):
   postedBy = serializers.ReadOnlyField(source='postedBy.username')
   class Meta:
     model = Post
-    fields = ('url', 'id', 'subject', 'notice_text', 'group', 'postedBy')
+    fields = ('url', 'id', 'subject', 'noticeText', 'group', 'postedBy', 'created')

@@ -8,7 +8,7 @@ class Post(models.Model):
   group = models.ForeignKey(FriendCircle, related_name='prikmuurpost', on_delete=models.CASCADE)
   postedBy = models.ForeignKey(CustomUser, related_name='prikmuurpost', on_delete=models.CASCADE)
   subject = models.CharField(max_length=45)
-  notice_text = models.TextField()
+  noticeText = models.TextField()
 
   class Meta:
     ordering = ('created',)

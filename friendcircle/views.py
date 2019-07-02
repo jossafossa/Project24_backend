@@ -27,9 +27,11 @@ class GetMyMemberships(generics.ListAPIView):
     def get_queryset(self):
         return(models.FriendCircle.objects.filter(friendcirclemembership__user=self.request.user))
 
-class GetMatchCandidateFriendCircle(generics.ListAPIView):
+class GetMatchCandidateFriendCircle(generics.RetrieveAPIView):
     serializer_class = serializers.FriendCircleSerializer
-    def get_queryset(self):
+    queryset = models.FriendCircle.objects.all()
+
+    def get_object(self):
         groups = models.FriendCircle.objects.all()
 
         # Exclude groups already swiped
@@ -37,11 +39,12 @@ class GetMatchCandidateFriendCircle(generics.ListAPIView):
         already_swiped_qs = already_swiped_qs.exclude(user_match_status='O')
         for already_swiped in already_swiped_qs:
             groups = groups.exclude(id=already_swiped.friendcircle.id)
-        return(groups)
+        return(groups.first())
 
-class GetMatchCandidateUser(generics.ListAPIView):
+class GetMatchCandidateUser(generics.RetrieveAPIView):
     serializer_class = UserSerializer
-    def get_queryset(self):
+    queryset = CustomUser.objects.all()
+    def get_object(self):
         friendcircle = self.kwargs.get('pk')
         users = CustomUser.objects.all()
 
@@ -51,7 +54,7 @@ class GetMatchCandidateUser(generics.ListAPIView):
         for already_swiped in already_swiped_qs:
             users = users.exclude(id=already_swiped.user.id)
 
-        return(users)
+        return(users.first())
 
 
 class SwipeCandidateFriendCircle(generics.CreateAPIView):

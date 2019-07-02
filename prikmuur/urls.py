@@ -6,7 +6,7 @@ urlpatterns = [
     path('',
         views.PostList.as_view(),
         name='post-list'),
-    url(r'^(?P<pk>[0-9]+)/$',
+    path('<int:pk>',
        views.PostDetail.as_view(),
        name='post-detail'),
     path('getGroup/<int:pk>',

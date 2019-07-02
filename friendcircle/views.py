@@ -30,7 +30,7 @@ class GetMyMemberships(generics.ListAPIView):
 class GetMatchCandidateFriendCircle(generics.ListAPIView):
     serializer_class = serializers.FriendCircleSerializer
     def get_queryset(self):
-        groups = models.FriendCircle.objects.filter(friendcirclemembership__user=self.request.user)
+        groups = models.FriendCircle.objects.all()
 
         # Exclude groups already swiped
         already_swiped_qs = models.FriendCircleMatcher.objects.filter(user=self.request.user)

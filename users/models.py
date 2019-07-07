@@ -3,6 +3,7 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     name = models.CharField(blank=True, max_length=255)
+    description = models.CharField(blank=True, max_length=1000)
     interests = models.ManyToManyField('interests.Interest', blank=True)
     pic1 = models.ImageField(blank=True)
     pic2 = models.ImageField(blank=True)
